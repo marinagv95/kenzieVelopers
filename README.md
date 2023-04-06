@@ -39,6 +39,10 @@ A entrega deve seguir as seguintes regras:
 Os testes não devem ser alterados em nenhum momento da aplicação, caso tenha sido feito alguma alteração nos testes, a entrega será zerada. 
 
 - Para rodar os testes precisa modificar a variavel de ambiente para test: **NODE_ENV="test"**
+- Para rodar a aplicação precisa popular as variaveis de ambiente, que irá encontrar no env.exemple:
+    - Tanto as com sufixo test (DB_TEST, DB_TEST_USER...) para conseguir utilizar o comando npm run test. 
+    - Quanto as demais (DB, DB_USER...)para conseguir utilizar o comando npm run dev 
+    - Aconselhamos criar dois bancos de dados um para o debug e outro para testes. 
 - Não altere os arquivos: 
   - jest.config
   - configTestsDatabase.ts
