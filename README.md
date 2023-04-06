@@ -34,7 +34,22 @@ A entrega deve seguir as seguintes regras:
 
 - A organização dos demais arquivos e pastas deve seguir o que foi visto previamente.
 
-#
+### AVISO
+
+Os testes não devem ser alterados em nenhum momento da aplicação, caso tenha sido feito alguma alteração nos testes, a entrega será zerada. 
+
+- Para rodar os testes precisa modificar a variavel de ambiente para test: **NODE_ENV="test"**
+- Não altere os arquivos: 
+  - jest.config
+  - configTestsDatabase.ts
+  - __tests__
+  - server.ts
+- Não remova o que está dentro do package.json, apenas adicione as libs que irá necessitar utilizar, caso elas já não estejam instaladas. 
+- Para rodar os testes utilize o comando: **npm run test**
+- Caso queria rodar uma bateria de testes especificos pode utilizar:
+  - npm run test <arquivo teste que está dentro de __testes__>
+  - **Exemplo**: npm run test createDeveloper.test
+
 
 ## **Tabelas do banco de dados**
 
