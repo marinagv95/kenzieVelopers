@@ -21,7 +21,7 @@ const config = () => {
 };
 const client = new Client(config());
 
-const startDatabase = async () => {
+const startDatabase = async (): Promise<void> => {
   await client.connect();
   console.log("Database connected.");
 };
