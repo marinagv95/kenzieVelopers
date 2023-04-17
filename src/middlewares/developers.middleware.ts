@@ -33,7 +33,7 @@ const ensureDevelopersExists = async (
   const queryResult: QueryResult<IDevelopers> = await client.query(queryConfig);
 
   if (queryResult.rowCount === 0) {
-    return res.status(409).json({
+    return res.status(404).json({
       message: "developers not found",
     });
   }
@@ -130,9 +130,12 @@ const developerInfoExists = async (
   const id: number = parseInt(req.params.id);
 
   const queryString: string = `
-    SELECT *
-    FROM developers
-    WHERE id = $1   
+    SELECT 
+          *
+    FROM 
+          developers_info
+    WHERE 
+        "developerId" = $1   
   `;
 
   const queryConfig: QueryConfig = {
@@ -146,7 +149,7 @@ const developerInfoExists = async (
 
   if (queryResult.rowCount > 0) {
     return res.status(409).json({
-      message: "Developer info already exists.",
+      message: "Developer infos already exists.",
     });
   }
 

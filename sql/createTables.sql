@@ -7,7 +7,7 @@ CREATE TABLE if NOT EXISTS developers(
 CREATE TYPE OS AS ENUM('Windows', 'Linux', 'MacOS');
 
 
-CREATE TABLE IF NOT EXISTS developer_info(
+CREATE TABLE IF NOT EXISTS developer_infos(
 "id" SERIAL PRIMARY KEY,
 "developerSince" DATE NOT NULL,
 "preferredOS" OS NOT NULL,
@@ -57,6 +57,6 @@ FOREIGN KEY ("developerId") REFERENCES developers("id") ON DELETE CASCADE
     "id" SERIAL PRIMARY KEY,
     "addedIn" DATE NOT NULL,
     "technologyId" INTEGER NOT NULL,
-    FOREIGN KEY ("technologyId") REFERENCES technologies("id") ON DELETE CASCADE,
     "projectId" INTEGER NOT NULL,
-FOREIGN KEY ("projectId") REFERENCES projects("id") ON DELETE CASCADE);
+     FOREIGN KEY ("technologyId") REFERENCES technologies("id") ON DELETE CASCADE,
+     FOREIGN KEY ("projectId") REFERENCES projects("id") ON DELETE CASCADE);

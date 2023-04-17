@@ -18,11 +18,12 @@ type ITechnologieRequest = Omit<ITechnologie, "id">;
 
 interface IInsertTec {
   name: string;
+  addedIn: Date;
 }
 
 interface IProjectTechnologies extends IProjectRequest {
-  developerId: number;
-  tec: Array<IInsertTec>;
+  projectId: number;
+  tecs: Array<IInsertTec>;
 }
 
 export {

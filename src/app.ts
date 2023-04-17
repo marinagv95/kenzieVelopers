@@ -25,7 +25,10 @@ import {
   deleteTechnologie,
   createProjectsTechnologies,
 } from "./logics/projects.logic";
-import { ensureTechnologieExists } from "./middlewares/projects.middleware";
+import {
+  ensureTechnologieExists,
+  ensureProjectExists,
+} from "./middlewares/projects.middleware";
 
 const app: Application = express();
 app.use(express.json());
@@ -50,27 +53,27 @@ app.patch("/developers/:id/infos", ensureDevelopersExists, updateDeveloperInfo);
 app.delete("/developers/:id", ensureDevelopersExists, deleteDeveloper);
 
 app.post("/projects", ensureDevelopersExists, createProject);
-app.get("/projects/:id", ensureDevelopersExists, getProjectsByDeveloperId);
+app.get("/projects/:id", ensureProjectExists, getProjectsByDeveloperId);
 app.patch(
   "/projects/:id",
-  ensureDevelopersExists,
+  ensureProjectExists,
   ensureDeveloperIDExists,
   updateProjects
 );
-app.delete("/projects/:id", ensureDevelopersExists, deleteProject);
+app.delete("/projects/:id", ensureProjectExists, deleteProject);
 
 app.post(
   "/projects/:id/technologies",
-  ensureDevelopersExists,
+  ensureProjectExists,
+  ensureTechnologieExists,
   createProjectsTechnologies
 );
-app.delete("/projects/:id/technologies/:name", deleteTechnologie);
-
-// app.listen(3000, async () => {
-//   await startDatabase();
-//   const host = "localhost";
-//   const port = 3000;
-//   console.log(`Server running at http://${host}:${port}/`);
-// });
+app.delete(
+  "/projects/:id/technologies/:name",
+  ensureProjectExists,
+  ensureTechnologieExists,
+  ensureProjectExists,
+  deleteTechnologie
+);
 
 export default app;

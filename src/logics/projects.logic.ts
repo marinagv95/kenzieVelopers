@@ -60,7 +60,7 @@ WHERE
 
   const queryResult: QueryResult<IProject> = await client.query(queryConfig);
 
-  return res.json(queryResult.rows);
+  return res.status(200).json(queryResult.rows);
 };
 
 const updateProjects = async (
@@ -68,10 +68,10 @@ const updateProjects = async (
   res: Response
 ): Promise<Response> => {
   const id: number = parseInt(req.params.id);
-  const projectData: Partial<IProjectRequest> = req.body;
+  const projectData: Partial<IProject> = req.body;
 
-  if (projectData.developerId) {
-    delete projectData.developerId;
+  if (projectData.id) {
+    delete projectData.id;
   }
 
   const queryString: string = format(
@@ -80,7 +80,7 @@ const updateProjects = async (
     projects
 SET(%I) = ROW(%L)
 WHERE
-    "developerId" = $1
+    "id" = $1
     RETURNING *;  
   `,
     Object.keys(projectData),
