@@ -72,7 +72,6 @@ app.delete(
   "/projects/:id/technologies/:name",
   ensureProjectExists,
   ensureTechnologieExists,
-  ensureProjectExists,
   deleteTechnologie
 );
 

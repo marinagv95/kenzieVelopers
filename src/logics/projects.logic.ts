@@ -94,7 +94,7 @@ WHERE
 
   const queryResult: QueryResult<IProject> = await client.query(queryConfig);
 
-  return res.json(queryResult.rows[0]);
+  return res.status(200).json(queryResult.rows[0]);
 };
 
 const deleteProject = async (

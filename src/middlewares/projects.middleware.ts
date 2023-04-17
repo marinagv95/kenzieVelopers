@@ -8,24 +8,22 @@ const ensureTechnologieExists = async (
   res: Response,
   next: NextFunction
 ): Promise<Response | void> => {
-  let technologyId: number = req.body.technologyId;
+  let name: string = req.body.name;
 
-  if (req.route.path === "/projects/:id/technologies/:technologyId") {
-    technologyId = parseInt(req.params.technologyId);
+  if (req.method === "DELETE") {
+    name = req.params.name;
   }
 
   const queryString: string = `
-        SELECT
-            *
-        FROM
-            technologies
-        WHERE
-            id = $1;
+    SELECT * FROM
+        technologies
+    WHERE 
+        "name" = $1;
     `;
 
   const queryConfig: QueryConfig = {
     text: queryString,
-    values: [technologyId],
+    values: [name],
   };
 
   const queryResult: QueryResult<ITechnologie> = await client.query(
@@ -48,6 +46,8 @@ const ensureTechnologieExists = async (
       ],
     });
   }
+
+  res.locals.technology = queryResult.rows[0];
 
   return next();
 };
