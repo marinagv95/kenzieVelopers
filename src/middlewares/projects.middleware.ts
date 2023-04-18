@@ -112,7 +112,7 @@ const ensureProjectTecExists = async (
     queryConfig
   );
 
-  if (queryResult.rowCount > 0) {
+  if (queryResult.rowCount === 0) {
     return res.status(400).json({
       message: "Technology not related to the project.",
     });
@@ -121,4 +121,49 @@ const ensureProjectTecExists = async (
   return next();
 };
 
-export { ensureProjectExists, ensureTechnologieExists, ensureProjectTecExists };
+const ensureTechProjectForDelete = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | void> => {
+  const projectId: number = parseInt(req.params.id);
+  const technologyName: string = req.params.name;
+
+  const queryString: string = `
+  DELETE FROM
+    technologies
+  USING 
+    projects_technologies
+    LEFT JOIN projects ON projects.id = projects_technologies."projectId"
+  WHERE 
+    "projectId" = $1 
+    AND technologies.id = projects_technologies."technologyId" 
+    AND technologies.name = $2
+`;
+
+  const queryConfig: QueryConfig = {
+    text: queryString,
+    values: [projectId, technologyName],
+  };
+
+  const queryResult: QueryResult<ITechnologie> = await client.query(
+    queryConfig
+  );
+
+  console.log(queryResult);
+
+  if (queryResult.rowCount === 0) {
+    return res.status(400).json({
+      message: "Technology not related to the project.",
+    });
+  }
+
+  return next();
+};
+
+export {
+  ensureProjectExists,
+  ensureTechnologieExists,
+  ensureProjectTecExists,
+  ensureTechProjectForDelete,
+};

@@ -17,7 +17,7 @@ const createDeveloper = async (
 
   const queryString: string = format(
     `
-            INSERT INTO
+                INSERT INTO
                 developers(%I)
             VALUES
                 (%L)

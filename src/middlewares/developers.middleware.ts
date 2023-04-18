@@ -18,13 +18,11 @@ const ensureDevelopersExists = async (
   }
 
   const queryString: string = `
-        SELECT
-            *
-        FROM
-            developers
-        WHERE
-            id = $1   
-   `;
+  SELECT * FROM
+      developers
+  WHERE
+      id = $1;
+  `;
 
   const queryConfig: QueryConfig = {
     text: queryString,
@@ -34,7 +32,7 @@ const ensureDevelopersExists = async (
 
   if (queryResult.rowCount === 0) {
     return res.status(404).json({
-      message: "developers not found",
+      message: "Developer not found",
     });
   }
 
@@ -101,7 +99,7 @@ const emailUsed = async (
     });
   }
 
-  res.locals.developers = queryResult.rows[0];
+  // res.locals.developers = queryResult.rows[0];
   return next();
 };
 
