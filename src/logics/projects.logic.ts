@@ -34,17 +34,16 @@ const getProjectsByDeveloperId = async (
   const id: number = parseInt(req.params.id);
   const queryString: string = `
   SELECT
-            pro."id" AS "projectId",
-            pro."name" AS "projectName",
-            pro."description" AS "projectDescription",
-            pro."estimatedTime" AS "projectEstimatedTime",
-            pro."repository" AS "projectRepository",
-            pro."startDate" AS"projectStartDate",
-            pro."endDate" AS "projectEndDate",
-            pro."developerId" AS "projectDeveloperId",
-            projt."technologyId",
-            projt."projectId",
-            tec."name"
+            pro."id" as "projectId",
+            pro."name" as "projectName",
+            pro."description" as "projectDescription",
+            pro."estimatedTime" as "projectEstimatedTime",
+            pro."repository" as "projectRepository",
+            pro."startDate" as "projectStartDate",
+            pro."endDate" as "projectEndDate",
+            pro."developerId" as "projectDeveloperId",
+            tec."id" as "technologyId",
+            tec."name" as "technologyName"
 FROM
             projects pro
             LEFT JOIN projects_technologies projt ON pro."id" = projt."projectId"
