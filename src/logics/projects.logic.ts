@@ -154,7 +154,7 @@ const createProjectsTechnologies = async (
   );
 
   if (technologiesCount.rowCount > 0) {
-    return res.status(404).json({ error: "technologies already exists" });
+    return res.status(409).json({ message: "technologies already exists" });
   }
 
   if (rows.length > 0) {
