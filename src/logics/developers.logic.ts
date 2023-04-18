@@ -42,7 +42,7 @@ const createDeveloperInfo = async (
   const queryString: string = format(
     `
       INSERT INTO
-      developer_info(%I)
+      developer_infos(%I)
       VALUES
         (%L)
       RETURNING *;           
@@ -68,7 +68,7 @@ const CheckInformationExists = async (
         SELECT
             *
         FROM
-            developer_info
+            developer_infos
         WHERE
             "id" = $1
     `;
@@ -105,7 +105,7 @@ const getDevelopers = async (
 FROM
     developers dev 
 LEFT JOIN
-    developer_info si ON dev."id" = si."developerId";  
+    developer_infos si ON dev."id" = si."developerId";  
   `;
 
   const queryResult: QueryResult<IDevelopers> = await client.query(queryString);
@@ -127,7 +127,7 @@ const getDeveloperById = async (
 FROM
   developers dev 
 LEFT JOIN
-  developer_info di ON dev."id" = di."developerId"
+  developer_infos di ON dev."id" = di."developerId"
 WHERE
   dev."id" = $1;
 `;
@@ -155,7 +155,7 @@ const updateDeveloperInfo = async (
   const queryString: string = format(
     `
   UPDATE 
-    developer_info
+    developer_infos
 SET(%I) = ROW(%L)
 WHERE
     "developerId" = $1

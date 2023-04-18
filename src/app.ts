@@ -28,6 +28,7 @@ import {
 import {
   ensureTechnologieExists,
   ensureProjectExists,
+  ensureProjectTecExists,
 } from "./middlewares/projects.middleware";
 
 const app: Application = express();
@@ -72,6 +73,7 @@ app.delete(
   "/projects/:id/technologies/:name",
   ensureProjectExists,
   ensureTechnologieExists,
+  ensureProjectTecExists,
   deleteTechnologie
 );
 

@@ -133,7 +133,7 @@ const developerInfoExists = async (
     SELECT 
           *
     FROM 
-          developers_info
+          developer_infos
     WHERE 
         "developerId" = $1   
   `;

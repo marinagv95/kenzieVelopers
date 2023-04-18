@@ -4,13 +4,13 @@ CREATE TABLE if NOT EXISTS developers(
 "email" VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TYPE OS AS ENUM('Windows', 'Linux', 'MacOS');
+CREATE TYPE "OS" AS ENUM('Windows', 'Linux', 'MacOS');
 
 
 CREATE TABLE IF NOT EXISTS developer_infos(
 "id" SERIAL PRIMARY KEY,
 "developerSince" DATE NOT NULL,
-"preferredOS" OS NOT NULL,
+"preferredOS" "OS" NOT NULL,
 "developerId" INTEGER NOT NULL unique,
 FOREIGN KEY ("developerId") REFERENCES developers("id") ON DELETE CASCADE
 );
